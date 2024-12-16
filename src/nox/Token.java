@@ -1,3 +1,5 @@
+package nox;
+
 public class Token {
     final TokenType tokenType;
     final String lexeme;
