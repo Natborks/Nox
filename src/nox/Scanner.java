@@ -72,6 +72,7 @@ public class Scanner {
                 break;
             case '=':
                 addToken(match('=') ? EQUAL_EQUAL : EQUAL);
+                break;
             case '<':
                 addToken(match('=') ? LESS_EQUAL : LESS);
                 break;
@@ -95,8 +96,9 @@ public class Scanner {
                     number();
                 } else if (isAlpha(c)) {
                     identifier(c);
+                } else {
+                    Nox.error(line, "Unexpected Character.");
                 }
-                Nox.error(line, "Unexpected Character.");
                 break;
         }
     }
