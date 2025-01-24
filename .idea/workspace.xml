@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0e50d820-9c50-4efe-8ba9-94995af03f76" name="Changes" comment="functions and closures">
-      <change afterPath="$PROJECT_DIR$/src/nox/Resolver.java" afterDir="false" />
+    <list default="true" id="0e50d820-9c50-4efe-8ba9-94995af03f76" name="Changes" comment="Fix closure scopes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nox/Environment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nox/Environment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nox/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nox/Interpreter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nox/Nox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nox/Nox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nox/Resolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nox/Resolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nox/Stmt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nox/Stmt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tool/GenerateAst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tool/GenerateAst.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +53,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.GenerateAst">
+  <component name="RunManager" selected="Application.Nox">
     <configuration name="AstPrinter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="nox.AstPrinter" />
       <module name="nox" />
@@ -98,8 +98,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GenerateAst" />
         <item itemvalue="Application.Nox" />
+        <item itemvalue="Application.GenerateAst" />
         <item itemvalue="Application.AstPrinter" />
       </list>
     </recent_temporary>
@@ -141,7 +141,14 @@
       <option name="project" value="LOCAL" />
       <updated>1737375613387</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fix closure scopes">
+      <created>1737756020516</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1737756020516</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -160,6 +167,7 @@
     <MESSAGE value="Add variables, assignments, and blocks" />
     <MESSAGE value="Add support for conditional statements and loops" />
     <MESSAGE value="functions and closures" />
-    <option name="LAST_COMMIT_MESSAGE" value="functions and closures" />
+    <MESSAGE value="Fix closure scopes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix closure scopes" />
   </component>
 </project>
