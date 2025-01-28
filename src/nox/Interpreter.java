@@ -209,6 +209,16 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void>{
 
     @Override
     public Void visitClassStmt(Stmt.Class stmt) {
+        environment.define(stmt.name.lexeme, null);
+
+        Map<String, NoxFunction> methods = new HashMap<>();
+        for (Stmt.Function method : stmt.methods){
+            NoxFunction function = new NoxFunction(method, environment,
+                    method.name.lexeme.equals("init"));
+            methods.put(method.name.lexeme, function);
+        }
+        NoxClass klass = new NoxClass(stmt.name.lexeme, methods);
+        environment.assign(stmt.name, klass);
         return null;
     }
 
@@ -222,7 +232,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void>{
 
     @Override
     public Void visitFunctionStmt(Stmt.Function stmt) {
-        NoxFunction function = new NoxFunction(stmt, environment);
+        NoxFunction function = new NoxFunction(stmt, environment, false);
         environment.define(stmt.name.lexeme, function);
         return null;
     }
@@ -311,6 +321,36 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void>{
         }
 
         return function.call(this, arguments);
+    }
+
+    @Override
+    public Object visitGetExpr(Expr.Get expr) {
+        Object object = evaluate(expr.object);
+        if (object instanceof NoxInstance) {
+            return ((NoxInstance) object).get(expr.name);
+        }
+
+        throw new RuntimeError(expr.name,
+                "Only instances have properties.");
+    }
+
+    @Override
+    public Object visitSetExpr(Expr.Set expr) {
+        Object object = evaluate(expr.object);
+
+        if (!(object instanceof NoxInstance)) {
+            throw new RuntimeError(expr.name,
+                    "Only instances have fields.");
+        }
+
+        Object value = evaluate(expr.value);
+        ((NoxInstance) object).set(expr.name, value);
+        return value;
+    }
+
+    @Override
+    public Object visitThisExpr(Expr.This expr) {
+        return lookUpVariable(expr.keyword, expr);
     }
 }
 

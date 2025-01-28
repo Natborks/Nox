@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e50d820-9c50-4efe-8ba9-94995af03f76" name="Changes" comment="Fix closure scopes">
+      <change afterPath="$PROJECT_DIR$/src/nox/NoxClass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/nox/NoxInstance.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nox/AstPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nox/AstPrinter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nox/Expr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nox/Expr.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nox/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nox/Interpreter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nox/NoxFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nox/NoxFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nox/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nox/Parser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/nox/Resolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nox/Resolver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/nox/Stmt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/nox/Stmt.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tool/GenerateAst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tool/GenerateAst.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -148,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1737756020516</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fix closure scopes">
+      <created>1737757456676</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1737757456676</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

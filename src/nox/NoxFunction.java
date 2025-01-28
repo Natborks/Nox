@@ -6,7 +6,12 @@ public class NoxFunction implements NoxCallable{
     private final Stmt.Function declaration;
     private final Environment closure;
 
-    public NoxFunction(Stmt.Function declaration, Environment closure) {
+    private final boolean isInitializer;
+
+    public NoxFunction(Stmt.Function declaration,
+                       Environment closure,
+                       boolean isInitializer) {
+        this.isInitializer = isInitializer;
         this.declaration = declaration;
         this.closure = closure;
     }
@@ -27,10 +32,20 @@ public class NoxFunction implements NoxCallable{
         try {
             interpreter.executeBlock(declaration.body, environment);
         } catch (Return returnValue) {
+            if (isInitializer) return closure.getAt(0, "this");
+
             return returnValue.value;
         }
 
+        if (isInitializer) return closure.getAt(0, "this");
+
         return null;
+    }
+
+    NoxFunction bind(NoxInstance noxInstance) {
+        Environment environment = new Environment(closure);
+        environment.define("this", noxInstance);
+        return new NoxFunction(declaration, environment, isInitializer);
     }
 
     @Override
