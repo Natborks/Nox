@@ -7,7 +7,10 @@ public class NoxClass implements NoxCallable{
     final String name;
     private final Map<String, NoxFunction> methods;
 
-    NoxClass(String name, Map<String, NoxFunction> methods) {
+    final NoxClass superclass;
+
+    NoxClass(String name, NoxClass superClass, Map<String, NoxFunction> methods) {
+        this.superclass = superClass;
         this.name = name;
         this.methods = methods;
     }
@@ -39,6 +42,10 @@ public class NoxClass implements NoxCallable{
     NoxFunction findMethod(String name) {
         if (methods.containsKey(name)) {
             return methods.get(name);
+        }
+
+        if (superclass != null) {
+            return superclass.findMethod(name);
         }
 
         return null;

@@ -209,7 +209,21 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void>{
 
     @Override
     public Void visitClassStmt(Stmt.Class stmt) {
+        Object superClass = null;
+        if (stmt.superclass != null) {
+            superClass = evaluate(stmt.superclass);
+
+            if (!(superClass instanceof NoxClass)) {
+                throw new RuntimeError(stmt.superclass.name,
+                        "Superclass must be a class");
+            }
+        }
         environment.define(stmt.name.lexeme, null);
+
+        if(stmt.superclass != null) {
+            environment = new Environment(environment);
+            environment.define("super", superClass);
+        }
 
         Map<String, NoxFunction> methods = new HashMap<>();
         for (Stmt.Function method : stmt.methods){
@@ -217,7 +231,12 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void>{
                     method.name.lexeme.equals("init"));
             methods.put(method.name.lexeme, function);
         }
-        NoxClass klass = new NoxClass(stmt.name.lexeme, methods);
+        NoxClass klass = new NoxClass(stmt.name.lexeme,
+                (NoxClass) superClass, methods);
+
+        if (superClass != null){
+            environment = environment.enclosing;
+        }
         environment.assign(stmt.name, klass);
         return null;
     }
@@ -346,6 +365,24 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void>{
         Object value = evaluate(expr.value);
         ((NoxInstance) object).set(expr.name, value);
         return value;
+    }
+
+    @Override
+    public Object visitSuperExpr(Expr.Super expr) {
+        int distance = locals.get(expr);
+        NoxClass superclass = (NoxClass) environment.getAt(distance, "super");
+
+        NoxInstance object = (NoxInstance) environment.getAt(
+                distance - 1, "this");
+
+        NoxFunction method = superclass.findMethod(expr.method.lexeme);
+
+        if (method == null) {
+            throw new RuntimeError(expr.method,
+                    "Undefined property '" + expr.method.lexeme + "'.");
+        }
+
+        return method.bind(object);
     }
 
     @Override
